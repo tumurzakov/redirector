@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"flag"
+	"fmt"
 	"github.com/elazarl/goproxy"
 	"io"
 	"log"
@@ -29,6 +30,11 @@ type Redirector struct {
 
 func main() {
 	r := Redirector{}
+
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		flag.PrintDefaults()
+	}
 
 	flag.StringVar(&r.ProxyAddr, "proxy", ":8080", "Proxy listen address")
 	flag.StringVar(&r.WebAddr, "web", ":8081", "Proxy listen address")
