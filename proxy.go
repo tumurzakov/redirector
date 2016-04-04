@@ -83,7 +83,7 @@ func (r *Redirector) InitProxyServer() error {
 	r.InitHosts()
 
 	for i := 0; i < len(r.Hosts); i++ {
-		r.Proxy.OnRequest(goproxy.ReqHostMatches(regexp.MustCompile("^.*" + r.Hosts[i] + "$"))).HandleConnect(goproxy.AlwaysMitm)
+		r.Proxy.OnRequest(goproxy.ReqHostMatches(regexp.MustCompile("^.*" + r.Hosts[i] + ".*$"))).HandleConnect(goproxy.AlwaysMitm)
 	}
 
 	r.Proxy.OnRequest().HandleConnectFunc(func(host string, ctx *goproxy.ProxyCtx) (*goproxy.ConnectAction, string) {
